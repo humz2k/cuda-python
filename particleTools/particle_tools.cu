@@ -13,12 +13,13 @@ __global__ void within_radius_kernel(const float3* __restrict d_particles, int* 
 
     float r2 = my_particle.x*my_particle.x + my_particle.y*my_particle.y + my_particle.z*my_particle.z;
     float r = sqrtf(r2);
-    out[i] = r < radius;
+    out[i] = (r < radius);
 
 }
 
 extern "C"{
     void within_radius_binding(float3* h_particles, int* h_out, int n_particles, float x, float y, float z, float radius){
+        printf("%g %g %g, %g\n",x,y,z,radius);
         float3* d_particles; cudaMalloc(&d_particles,sizeof(float3)*n_particles);
         cudaMemcpy(d_particles,h_particles,sizeof(float3)*n_particles,cudaMemcpyHostToDevice);
         int* d_out; cudaMalloc(&d_out,sizeof(int)*n_particles);
