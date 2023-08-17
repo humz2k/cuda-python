@@ -1,6 +1,6 @@
 import numpy as np
-import myCudaLibrary
+import mySimpleCudaLibrary
 
 array = np.zeros(10000,dtype=np.int32)
-array = myCudaLibrary.mySimpleKernel(array)
+array = mySimpleCudaLibrary.mySimpleKernel(array)
 print(array)
